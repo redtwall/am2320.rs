@@ -1,6 +1,6 @@
 [package]
 name = "am2320"
-version = "0.2.0"
+version = "1.0.0-rc.1"
 description = "Platform-agnostic driver to interface with the AM2320 I2c temperature & humidity sensor based on the `embedded-hal` traits"
 categories = ["hardware-support"]
 keywords = ["driver", "temperature", "humidity", "sensor", "embedded-hal"]
@@ -10,7 +10,4 @@ edition = "2018"
 repository = "https://github.com/gferon/am2320.rs"
 
 [dependencies]
-embedded-hal = "0.2"
-
-[dev-dependencies]
-rppal = { version = "0.13", features = ["hal"] }
+embedded-hal = "1.0.0"

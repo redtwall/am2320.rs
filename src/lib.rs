@@ -6,7 +6,7 @@
 #![no_std]
 #![deny(warnings, missing_docs)]
 
-use embedded_hal::blocking::{delay, i2c};
+use embedded_hal::{delay, i2c};
 
 const DEVICE_I2C_ADDR: u8 = 0x5c;
 
@@ -57,8 +57,8 @@ fn crc16(data: &[u8]) -> u16 {
 
 impl<I2C, Delay, E> Am2320<I2C, Delay>
 where
-    I2C: i2c::Read<Error = E> + i2c::Write<Error = E>,
-    Delay: delay::DelayUs<u16>,
+    I2C: i2c::I2c<Error = E>,
+    Delay: delay::DelayNs,
 {
     /// Create a AM2320 temperature sensor driver.
     ///
@@ -130,7 +130,7 @@ where
 
         let mut temperature = i16::from_be_bytes([data[4] & 0b0111_1111, data[5]]);
         if data[4] & 0b1000_0000 != 0 {
-          temperature = -temperature;
+            temperature = -temperature;
         }
 
         let humidity = u16::from_be_bytes([data[2], data[3]]);
